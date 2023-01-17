@@ -79,18 +79,33 @@ func handleExport(exportToPath string) {
         return
     }
 
-    files, err := ioutil.ReadDir(getConfigPath())
+    _copyDir(getConfigPath(), _path)
+}
+
+func handleImport(importFromPath string) {
+    _path, err := filepath.Abs(importFromPath)
+
+    if err != nil {
+        fmt.Printf("The folder %s does not exist\n", _path)
+        return
+    }
+
+    _copyDir(_path, getConfigPath())
+}
+
+func _copyDir(source string, dist string) {
+    files, err := ioutil.ReadDir(source)
 
     if err != nil {
         return
     }
 
     for _, file := range files {
-        source := path.Join(getConfigPath(), file.Name())
-        dist := path.Join(_path, file.Name())
+        _source := path.Join(source, file.Name())
+        _dist := path.Join(dist, file.Name())
 
-        data, _ := ioutil.ReadFile(source)
+        data, _ := ioutil.ReadFile(_source)
 
-        ioutil.WriteFile(dist, data, 0644)
+        ioutil.WriteFile(_dist, data, 0644)
     }
 }

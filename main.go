@@ -30,6 +30,10 @@ func main() {
         handleExport(args[1])
         break
 
+    case "import":
+        handleImport(args[1])
+        break
+
     default:
         app := args[0]
         handleRead(app)
