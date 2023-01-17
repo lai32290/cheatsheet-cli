@@ -23,3 +23,8 @@ Export all your saved cheatsheet to backup:
 ```
 $ cs export ./backup
 ```
+
+Import your cheatsheets:
+```
+$ cs import ./backup
+```
